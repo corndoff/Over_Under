@@ -1,4 +1,4 @@
-﻿using System;
+﻿uusing System;
 
 namespace Over_Under
 {
@@ -23,16 +23,14 @@ namespace Over_Under
                 }
                 if ((old > next && answer == 'U') || (old < next && answer == 'O'))
                 {
-                    Console.WriteLine($"Correct. The next number was {next}.");
+                    Correct(next);
                     old = next;
                     next = RandNum();
                     count++;
                 }
                 else
                 {
-                    Console.WriteLine($"Wrong. The next number was {next}. Your score was {count}. \n\n Would you like to play again? [Y or N] ");
-
-                    //Console.WriteLine("Would you like to play again? [Y or N] ");
+                    Incorrect(next, count);
                     char again = Char.ToUpper(Console.ReadLine()[0]);
                     if (again == 'Y')
                     {
@@ -53,6 +51,19 @@ namespace Over_Under
         {
             Random num = new Random();
             return num.Next(10);
+        }
+        static void Correct(int next)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"Correct. The next number was {next}.");
+            Console.ResetColor();
+        }
+        static void Incorrect(int next, int count)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Wrong. The next number was {next}. Your score was {count}.");
+            Console.ResetColor();
+            Console.WriteLine("\n\n Would you like to play again? [Y or N]");
         }
     }
 }
